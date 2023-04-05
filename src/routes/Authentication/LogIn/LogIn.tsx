@@ -1,10 +1,10 @@
 import {LogInContainer} from "./LogIn.styles";
-import {LogInForm} from "./components/LogInForm";
-import {LogInAside} from "./components/LogInAside";
+import {LogInForm} from "../components/LogInForm";
+import {Aside} from "../components/Aside";
 
 export const LogIn = () => {
     return <LogInContainer>
         <LogInForm />
-        <LogInAside />
+        <Aside />
     </LogInContainer>
 }

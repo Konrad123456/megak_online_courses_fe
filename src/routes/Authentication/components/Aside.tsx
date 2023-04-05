@@ -1,10 +1,11 @@
 import Learning from '../../../assets/imgs/learning.jpg';
-import {AsideImg, FormTitle, LogInAsideContainer} from "../LogIn.styles";
 import BackGround from '../../../assets/imgs/background.jpg';
+import {AsideImg, LogInAsideContainer} from "./Aside.styles";
+import {Title} from "./Title";
 
-export const LogInAside = () => {
+export const Aside = () => {
     return <LogInAsideContainer style={{backgroundImage: `url(${BackGround})`}}>
-        <FormTitle>Start your adventure!</FormTitle>
+        <Title title={'Start your adventure!'}/>
         <AsideImg src={Learning} alt="learning"/>
         <p>Take your time, spend it smartly! Do something for you!</p>
     </LogInAsideContainer>
