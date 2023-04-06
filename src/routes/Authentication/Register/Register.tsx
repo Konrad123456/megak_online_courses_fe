@@ -1,10 +1,10 @@
-import {LogInContainer} from "../LogIn/LogIn.styles";
 import {RegisterForm} from "../components/RegisterForm";
 import {Aside} from "../components/Aside";
+import {AuthContainer} from "../components/AuthContainer";
 
 export const Register = () => {
-    return <LogInContainer>
+    return <AuthContainer>
         <RegisterForm />
         <Aside />
-    </LogInContainer>
+    </AuthContainer>
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LogInFormContainer = styled.form`
+export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -10,7 +10,7 @@ export const LogInFormContainer = styled.form`
   height: 95%;
 `
 
-export const LogInInputsContainer = styled.form`
+export const InputsContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
