@@ -5,6 +5,10 @@ import {FormFooter} from "./FormFooter";
 import {FormInputContainer, Input, Label} from "../../../reusableComponents/FormInput/FormInput.styles";
 import React from "react";
 import {useForm} from "react-hook-form";
+import {useLocation} from "react-router";
+import {
+    ValidationMessage
+} from "../../../reusableComponents/ValidationMessage/ValidationMessage";
 
 interface LogInUserData {
     email: string;
@@ -12,7 +16,9 @@ interface LogInUserData {
 }
 
 export const LogInForm = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm<LogInUserData>();
+    const {register, handleSubmit} = useForm<LogInUserData>();
+    const location = useLocation();
+
     const onSubmit = (data: LogInUserData) => {
         console.log(data)
     };
@@ -30,6 +36,12 @@ export const LogInForm = () => {
                     <Input id={'userPassword'} type={'password'} {...register("password")} />
                 </FormInputContainer>
                 <Button label={'Log In'} onClick={() => console.log(true)}/>
+                {
+                    location.state &&
+                    <FormInputContainer>
+                        <ValidationMessage message={location.state?.success} />
+                    </FormInputContainer>
+                }
             </InputsContainer>
         </FormContainer>
         <FormFooter />

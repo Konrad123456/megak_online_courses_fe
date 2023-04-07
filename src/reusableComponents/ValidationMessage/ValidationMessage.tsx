@@ -13,7 +13,7 @@ interface IValidationMessageProps {
     variant?: AvailableVariants;
 }
 
-export const ValidationMessage: React.FC<IValidationMessageProps> = ({message, variant= 'success'}) => {
+export const ValidationMessage: React.FC<IValidationMessageProps> = ({message, variant= AvailableVariantsColor.SUCCESS}) => {
     let bgcColor;
     switch (variant) {
         case AvailableVariantsColor.ERROR:
@@ -24,7 +24,7 @@ export const ValidationMessage: React.FC<IValidationMessageProps> = ({message, v
             break;
         case AvailableVariantsColor.SUCCESS:
         default:
-            bgcColor = 'green';
+            bgcColor = '#ff0101';
     }
 
     return <ValidationMessageText style={{backgroundColor: bgcColor}}>
