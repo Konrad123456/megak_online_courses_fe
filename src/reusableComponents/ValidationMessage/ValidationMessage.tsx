@@ -10,21 +10,24 @@ export enum AvailableVariantsColor {
 
 interface IValidationMessageProps {
     message: string;
-    variant?: AvailableVariants;
+    variant?: AvailableVariantsColor;
 }
 
 export const ValidationMessage: React.FC<IValidationMessageProps> = ({message, variant= AvailableVariantsColor.SUCCESS}) => {
     let bgcColor;
     switch (variant) {
-        case AvailableVariantsColor.ERROR:
-            bgcColor = '#ff0033';
+        case AvailableVariantsColor.ERROR: {
+            bgcColor = '#ec5a77';
             break;
-        case AvailableVariantsColor.WARNING:
+        }
+        case AvailableVariantsColor.WARNING: {
             bgcColor = 'yellow';
             break;
+        }
         case AvailableVariantsColor.SUCCESS:
-        default:
-            bgcColor = '#ff0101';
+        default: {
+            bgcColor = 'green';
+        }
     }
 
     return <ValidationMessageText style={{backgroundColor: bgcColor}}>

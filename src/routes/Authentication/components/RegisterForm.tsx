@@ -3,15 +3,17 @@ import {FormContainer, InputsContainer} from "./Forms.styles";
 import {FormFooter} from "./FormFooter";
 import {Title} from "./Title";
 import {useForm} from "react-hook-form";
-import {FormInputContainer, Input, Label} from "../../../reusableComponents/FormInput/FormInput.styles";
-import React from "react";
+import React, {useState} from "react";
+import {zodResolver} from '@hookform/resolvers/zod';
+import {registerUserSchema} from "../ValidationSchemas/ValidationSchemas";
+import {useNavigate} from "react-router";
+import {FormInput} from "../../../reusableComponents/FormInput/FormInput";
+import {urlConfig} from "../../../config/url.config";
 import {
     AvailableVariantsColor,
     ValidationMessage
 } from "../../../reusableComponents/ValidationMessage/ValidationMessage";
-import { zodResolver } from '@hookform/resolvers/zod';
-import {registerUserSchema} from "../ValidationSchemas/ValidationSchemas";
-import {useNavigate} from "react-router";
+import {FormInputContainer} from "../../../reusableComponents/FormInput/FormInput.styles";
 
 interface CreateUserForm {
     firstName: string;
@@ -22,14 +24,18 @@ interface CreateUserForm {
 }
 
 export const RegisterForm = () => {
+    const [error, setError] = useState({
+        isError: false,
+        errorMessage: '',
+    });
+    const navigation = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm<CreateUserForm>({
         resolver: zodResolver(registerUserSchema),
     });
-    const navigation = useNavigate();
 
     const onSubmit = async (data: CreateUserForm) => {
         const {firstName, lastName, email, password} = data;
-        const responseData = await fetch('http://localhost:8000/auth/register', {
+        const responseData = await fetch(urlConfig.baseUrl + '/auth/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -39,9 +45,12 @@ export const RegisterForm = () => {
                 password,
             })
         });
+        const decodedData = await responseData.json();
         if(responseData.ok) {
             navigation('/signIn', {state: {success: 'Account created successfully. Now you can log in!'}});
+            setError({isError: false, errorMessage: ''});
         } else {
+            setError({isError: true, errorMessage: decodedData.message.join('\n')});
             console.log('Something went wrong');
         }
     };
@@ -50,37 +59,41 @@ export const RegisterForm = () => {
         <FormContainer>
             <Title title={'MegaK Coursera'}/>
             <InputsContainer onSubmit={handleSubmit(onSubmit)}>
-                <FormInputContainer>
-                    <Label htmlFor={'firstName'}>{"First Name"}</Label>
-                    <Input id={'firstName'} {...register("firstName")} />
-                    {errors.firstName?.message ? <ValidationMessage message={errors.firstName.message} variant={AvailableVariantsColor.ERROR}/> : null}
-                </FormInputContainer>
-
-                <FormInputContainer>
-                    <Label htmlFor={'lastName'}>{"Last Name"}</Label>
-                    <Input id={'lastName'} {...register("lastName")} />
-                    {errors.lastName?.message ? <ValidationMessage message={errors.lastName.message} variant={AvailableVariantsColor.ERROR} /> : null}
-                </FormInputContainer>
-
-                <FormInputContainer>
-                    <Label htmlFor={'email'}>{"Email"}</Label>
-                    <Input id={'email'} type={'email'} {...register("email")} />
-                    {errors.email?.message ? <ValidationMessage message={errors.email.message} variant={AvailableVariantsColor.ERROR} /> : null}
-                </FormInputContainer>
-
-                <FormInputContainer>
-                    <Label htmlFor={'Password'}>{"Password"}</Label>
-                    <Input id={'password'} type={'password'} {...register("password")} />
-                    {errors.password?.message ? <ValidationMessage message={errors.password.message} variant={AvailableVariantsColor.ERROR} /> : null}
-                </FormInputContainer>
-
-                <FormInputContainer>
-                    <Label htmlFor={'confirmPassword'}>{"Confirm password"}</Label>
-                    <Input id={'confirmPassword'} type={'password'} {...register("confirmPassword")} />
-                    {errors.confirmPassword?.message ? <ValidationMessage message={errors.confirmPassword.message} variant={AvailableVariantsColor.ERROR} /> : null}
-                </FormInputContainer>
-
+                <FormInput
+                    label={'First name'}
+                    registerObj={{...register('firstName')}}
+                    errorText={errors.firstName?.message}
+                />
+                <FormInput
+                    label={'Last name'}
+                    registerObj={{...register('lastName')}}
+                    errorText={errors.lastName?.message}
+                />
+                <FormInput
+                    label={'Email'}
+                    type={'email'}
+                    registerObj={{...register('email')}}
+                    errorText={errors.email?.message}
+                />
+                <FormInput
+                    label={'Password'}
+                    type={'password'}
+                    registerObj={{...register('password')}}
+                    errorText={errors.password?.message}
+                />
+                <FormInput
+                    label={'Confirm password'}
+                    type={'password'}
+                    registerObj={{...register('confirmPassword')}}
+                    errorText={errors.confirmPassword?.message}
+                />
                 <Button label={'Register'} />
+                {
+                    error.isError &&
+                    <FormInputContainer>
+                        <ValidationMessage message={error.errorMessage} variant={AvailableVariantsColor.ERROR} />
+                    </FormInputContainer>
+                }
             </InputsContainer>
         </FormContainer>
         <FormFooter />
