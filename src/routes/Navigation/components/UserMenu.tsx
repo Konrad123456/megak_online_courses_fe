@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {logOut} from "../../../features/auth/authSlice";
 import {useLogoutMutation} from "../../../app/api/authApiSlice";
 import {ListElement, ListMenu, MenuContainer, SettingsContainer, UserName} from "./UserMenu.styles";
+import {useNavigate} from "react-router";
 
 interface IUserMenuProps {
     user: User,
@@ -13,6 +14,7 @@ interface IUserMenuProps {
 export const UserMenu: React.FC<IUserMenuProps> = ({user}) => {
     const [isVisable, setIsVisable] = useState(false);
     const [logout, { isLoading }] = useLogoutMutation();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const visableChange = () => {
@@ -20,9 +22,9 @@ export const UserMenu: React.FC<IUserMenuProps> = ({user}) => {
     }
 
     const logOutClick = async () => {
-        const userData = await logout({}).unwrap();
-        console.log(userData);
+        await logout({}).unwrap();
         dispatch(logOut());
+        navigate('/');
     }
 
     return <MenuContainer>

@@ -6,6 +6,7 @@ import {LogIn} from "./routes/Authentication/LogIn/LogIn";
 import {Register} from "./routes/Authentication/Register/Register";
 import {AppContainer} from "./App.styles";
 import {Home} from "./routes/Home/Home";
+import {Courses} from "./routes/Courses/Pages/Courses";
 
 const App = () => {
   return (
@@ -15,6 +16,9 @@ const App = () => {
                   <Route index element={<Home />}/>
                   <Route path='signIn' element={<LogIn />}/>
                   <Route path='register' element={<Register />}/>
+                  <Route path='courses' >
+                      <Route index element={<Courses />} />
+                  </Route>
               </Route>
           </Routes>
       </AppContainer>
