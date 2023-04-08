@@ -1,26 +1,24 @@
 import React from 'react';
 import './App.css';
+import {Route, Routes} from "react-router";
+import {Navigation} from "./routes/Navigation/Navigation";
+import {LogIn} from "./routes/Authentication/LogIn/LogIn";
+import {Register} from "./routes/Authentication/Register/Register";
+import {AppContainer} from "./App.styles";
+import {Home} from "./routes/Home/Home";
 
-const logo = require("./logo.svg") as string;
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <AppContainer>
+          <Routes>
+              <Route path='/' element={<Navigation />}>
+                  <Route index element={<Home />}/>
+                  <Route path='signIn' element={<LogIn />}/>
+                  <Route path='register' element={<Register />}/>
+              </Route>
+          </Routes>
+      </AppContainer>
+
   );
 }
 
