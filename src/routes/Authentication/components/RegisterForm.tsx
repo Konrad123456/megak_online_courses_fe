@@ -3,7 +3,7 @@ import {FormContainer, InputsContainer} from "./Forms.styles";
 import {FormFooter} from "./FormFooter";
 import {Title} from "./Title";
 import {useForm} from "react-hook-form";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {zodResolver} from '@hookform/resolvers/zod';
 import {registerUserSchema} from "../ValidationSchemas/ValidationSchemas";
 import {useNavigate} from "react-router";
@@ -14,6 +14,8 @@ import {
     ValidationMessage
 } from "../../../reusableComponents/ValidationMessage/ValidationMessage";
 import {FormInputContainer} from "../../../reusableComponents/FormInput/FormInput.styles";
+import {useSelector} from "react-redux";
+import {selectCurrentUser} from "../../../features/auth/authSlice";
 
 interface CreateUserForm {
     firstName: string;
@@ -28,10 +30,17 @@ export const RegisterForm = () => {
         isError: false,
         errorMessage: '',
     });
+    const user = useSelector(selectCurrentUser);
     const navigation = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm<CreateUserForm>({
         resolver: zodResolver(registerUserSchema),
     });
+
+    useEffect(() => {
+        if (user) {
+            navigation('/');
+        }
+    }, [])
 
     const onSubmit = async (data: CreateUserForm) => {
         const {firstName, lastName, email, password} = data;
@@ -95,7 +104,7 @@ export const RegisterForm = () => {
                     </FormInputContainer>
                 }
             </InputsContainer>
+            <FormFooter />
         </FormContainer>
-        <FormFooter />
     </div>
 }

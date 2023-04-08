@@ -3,7 +3,7 @@ import {FormContainer, InputsContainer} from "./Forms.styles";
 import {Title} from "./Title";
 import {FormFooter} from "./FormFooter";
 import {FormInputContainer} from "../../../reusableComponents/FormInput/FormInput.styles";
-import React from "react";
+import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {useLocation, useNavigate} from "react-router";
 import {
@@ -11,8 +11,8 @@ import {
 } from "../../../reusableComponents/ValidationMessage/ValidationMessage";
 import {FormInput} from "../../../reusableComponents/FormInput/FormInput";
 import {useLoginMutation} from "../../../app/api/authApiSlice";
-import {useDispatch} from "react-redux";
-import { setCredentials } from "../../../features/auth/authSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectCurrentUser, setCredentials} from "../../../features/auth/authSlice";
 
 interface LogInUserData {
     email: string;
@@ -21,23 +21,27 @@ interface LogInUserData {
 
 export const LogInForm = () => {
     const {register, handleSubmit, formState: {errors}} = useForm<LogInUserData>();
+    const user = useSelector(selectCurrentUser);
     const location = useLocation();
     const [login, { isLoading }] = useLoginMutation();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const navigation = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            navigation('/');
+        }
+    }, [])
 
     const onSubmit = async (data: LogInUserData) => {
-        console.log(data);
         const { email, password } = data;
         try {
             const userData = await login({username: email, password}).unwrap();
-            console.log(userData);
             dispatch(setCredentials(userData));
-            navigate('/');
+            navigation('/');
         } catch (e) {
             console.log('Fail');
         }
-
     };
 
     return <div>

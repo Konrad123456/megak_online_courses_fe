@@ -13,7 +13,7 @@ export const FormContainer = styled.div`
 export const InputsContainer = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: stretch;
   align-items: stretch;
   width: 60%;
 `

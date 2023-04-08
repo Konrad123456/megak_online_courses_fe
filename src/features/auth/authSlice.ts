@@ -1,17 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-interface Role {
-    id: string;
-    role: string;
-}
+import { User } from "./types";
 
 interface InitialAuthState {
-    user: {
-        firstName: string;
-        lastName: string;
-        email: string;
-        roles: Role[];
-    } | null;
+    user: User | null;
     token: string | null;
 }
 

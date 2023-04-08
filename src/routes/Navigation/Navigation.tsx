@@ -3,6 +3,7 @@ import {LogInContainer, LogoText, NavigationContainer, NavigationsContainer, Nav
 import {ReactComponent as Logo} from '../../assets/logo/logo.svg';
 import {useSelector} from "react-redux";
 import {selectCurrentUser} from "../../features/auth/authSlice";
+import {UserMenu} from "./components/UserMenu";
 
 export const Navigation = () => {
     const user = useSelector(selectCurrentUser);
@@ -11,7 +12,9 @@ export const Navigation = () => {
         <>
             <NavigationContainer>
                 <Logo />
-                <LogoText>MegaK Coursera</LogoText>
+                <LogoText>
+                    <NavLink to={'/'}>MegaK Coursera</NavLink>
+                </LogoText>
                 <NavigationsContainer>
                     <NavLink to={'/courses'}>Courses</NavLink>
                     <NavLink to={'/about'}>About</NavLink>
@@ -20,7 +23,7 @@ export const Navigation = () => {
                 {
                     //TODO make logout button and make it prettier
                     user ?
-                        <span>{user.firstName}</span> :
+                        <UserMenu user={user}/> :
                         <LogInContainer>
                             <NavLink to={'/signIn'}>Sing In!</NavLink>
                             <NavLink to={'/register'}>Register</NavLink>

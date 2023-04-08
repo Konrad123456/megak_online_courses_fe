@@ -6,7 +6,6 @@ export const NavigationContainer = styled.nav`
   justify-content: end;
   align-items: center;
   gap: 10px;
-  height: 5vh;
   padding: 5px 2rem;
   background-color: #1b1834;
   color: white;
