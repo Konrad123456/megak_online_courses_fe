@@ -6,22 +6,27 @@ import {LogIn} from "./routes/Authentication/LogIn/LogIn";
 import {Register} from "./routes/Authentication/Register/Register";
 import {AppContainer} from "./App.styles";
 import {Home} from "./routes/Home/Home";
-import {useSelector} from "react-redux";
-import {selectCurrentUser} from "./features/auth/authSlice";
+import {useDispatch} from "react-redux";
+import {setCredentials} from "./features/auth/authSlice";
 import {useAuthenticatedMutation, useRefreshMutation} from "./app/api/authApiSlice";
 
 const App = () => {
-  const user = useSelector(selectCurrentUser);
   const [refresh] = useRefreshMutation();
   const [authenticated] = useAuthenticatedMutation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
      const checkLogIn = async () => {
-         const isAuthenticated = await authenticated(null).unwrap();
-         console.log(isAuthenticated);
-         if(isAuthenticated) {
+        const isAuthenticated = await authenticated({}).unwrap();
+        console.log(isAuthenticated);
+        if(isAuthenticated) {
            const user = await refresh({});
-         }
+           //@ts-ignore
+            if (user.data) {
+             //@ts-ignore
+             dispatch(setCredentials(user.data))
+           }
+       }
      }
       checkLogIn();
   }, []);

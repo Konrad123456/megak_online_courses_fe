@@ -1,4 +1,5 @@
 import { apiSlice} from "./apiSlice";
+import {User, withToken} from "../../features/auth/types";
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -9,13 +10,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: { ...credentials }
             })
         }),
-        refresh: builder.mutation({
+        refresh: builder.mutation<{user: User} & withToken, {}>({
             query: () => ({
                 url: '/auth/refresh',
                 method: "GET",
             })
         }),
-        authenticated: builder.mutation<boolean, null>({
+        authenticated: builder.mutation<boolean, {}>({
             query: () => ({
                 url: '/auth/authenticated',
                 method: "GET",
