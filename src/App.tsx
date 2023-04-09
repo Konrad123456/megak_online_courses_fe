@@ -43,6 +43,7 @@ const App = () => {
                   <Route path='courses' >
                       <Route index element={<Courses />} />
                       <Route path=':courseId' element={<Course />} />
+                      <Route path='add-course' element={<Course />} />
                   </Route>
               </Route>
           </Routes>

@@ -6,6 +6,8 @@ import {logOut} from "../../../features/auth/authSlice";
 import {useLogoutMutation} from "../../../app/api/authApiSlice";
 import {ListElement, ListMenu, MenuContainer, SettingsContainer, UserName} from "./UserMenu.styles";
 import {useNavigate} from "react-router";
+import {InstructorActions} from "./InstructorActions";
+import {AdminActions} from "./AdminActions";
 
 interface IUserMenuProps {
     user: User,
@@ -33,8 +35,10 @@ export const UserMenu: React.FC<IUserMenuProps> = ({user}) => {
             <UserName>{`${user.firstName} ${user.lastName}`}</UserName>
         </SettingsContainer>
         {isVisable && <ListMenu>
-            <ListElement>Settings</ListElement>
-            <ListElement onClick={logOutClick}>Log Out!</ListElement>
+            <ListElement to={'/settings'}>Settings</ListElement>
+            <InstructorActions user={user} onClick={visableChange} />
+            <AdminActions user={user} onClick={visableChange} />
+            <ListElement to={''} onClick={logOutClick}>Log Out!</ListElement>
         </ListMenu>}
     </MenuContainer>
 }
