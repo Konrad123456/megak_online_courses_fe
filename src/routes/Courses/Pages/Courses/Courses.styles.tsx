@@ -34,6 +34,6 @@ export const ImgContainer = styled.div`
   flex-direction: column;
   align-items: center;
   & img {
-    max-height: 150px;
+    height: 150px;
   }
 `;

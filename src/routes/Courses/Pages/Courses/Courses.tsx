@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useCoursesViewMutation} from "../../../app/api/coursesApiSlice";
-import {getCoursesResponse} from "../types/types";
-import {CourseCard, CoursesContainer, CoursesPageContainer, CoursesTitle, ImgContainer} from "./Courses.styles";
+import {useCoursesViewMutation} from "../../../../app/api/coursesApiSlice";
+import {getCoursesResponse} from "../../types/types";
 import {NavLink} from "react-router-dom";
-import {PaginationWrapper} from "../../../reusableComponents/PaginationWrapper/PaginationWrapper";
-import {urlConfig} from "../../../config/url.config";
+import {CourseCard, CoursesContainer, CoursesPageContainer, CoursesTitle, ImgContainer} from "./Courses.styles";
+import {PaginationWrapper} from "../../../../reusableComponents/PaginationWrapper/PaginationWrapper";
+import {urlConfig} from "../../../../config/url.config";
 
 interface ICoursesProps {
 

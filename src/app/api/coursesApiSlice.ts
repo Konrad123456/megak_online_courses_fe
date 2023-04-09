@@ -1,5 +1,5 @@
 import { apiSlice} from "./apiSlice";
-import {getCoursesResponse} from "../../routes/Courses/types/types";
+import { CourseWithLesson, getCoursesResponse } from "../../routes/Courses/types/types";
 
 interface coursesViewArgs {
     page: number,
@@ -21,9 +21,19 @@ export const coursesApiSlice = apiSlice.injectEndpoints({
                 }
             }
         }),
+        courseView: builder.mutation<CourseWithLesson, {id: string}>({
+            query: (args) => {
+                const { id } = args;
+                return {
+                    url: '/courses/' + id,
+                    method:"GET",
+                }
+            }
+        }),
     })
 })
 
 export const {
     useCoursesViewMutation,
+    useCourseViewMutation,
 } = coursesApiSlice;
