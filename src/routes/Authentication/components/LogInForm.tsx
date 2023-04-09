@@ -59,7 +59,7 @@ export const LogInForm = () => {
                     registerObj={{...register("password")}}
                     errorText={errors.password?.message}
                 />
-                <Button label={'Log In'} />
+                <Button label={'Log In'} isLoading={isLoading}/>
                 {
                     location.state &&
                     <FormInputContainer>

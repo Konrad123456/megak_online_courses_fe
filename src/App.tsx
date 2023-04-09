@@ -20,7 +20,6 @@ const App = () => {
   useEffect(() => {
      const checkLogIn = async () => {
         const isAuthenticated = await authenticated({}).unwrap();
-        console.log(isAuthenticated);
         if(isAuthenticated) {
            const user = await refresh({});
            //@ts-ignore

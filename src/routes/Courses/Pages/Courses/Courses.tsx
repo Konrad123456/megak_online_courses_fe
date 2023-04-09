@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {useCoursesViewMutation} from "../../../../app/api/coursesApiSlice";
 import {getCoursesResponse} from "../../types/types";
-import {NavLink} from "react-router-dom";
-import {CourseCard, CoursesContainer, CoursesPageContainer, CoursesTitle, ImgContainer} from "./Courses.styles";
+import {CoursesContainer, CoursesPageContainer, CoursesTitle} from "./Courses.styles";
 import {PaginationWrapper} from "../../../../reusableComponents/PaginationWrapper/PaginationWrapper";
-import {urlConfig} from "../../../../config/url.config";
+import {CourseCard} from "../../components/CourseCard";
 
 interface ICoursesProps {
 
@@ -46,16 +45,7 @@ export const Courses: React.FC<ICoursesProps> = () => {
         </CoursesTitle>
         <CoursesContainer>
             {coursesData.items.map(course => {
-                return <CourseCard key={course.id}>
-                    {
-                        course.imgUrl ?
-                            <ImgContainer><img src={`${urlConfig.baseUrl}/uploads/courses/${course.id}/img`} alt=""/></ImgContainer> :
-                            null
-                    }
-                    <h2>{course.title}</h2>
-                    <p>{course.description}</p>
-                    <NavLink to={'/courses/' + course.id}>Go to Course</NavLink>
-                </CourseCard>
+                return <CourseCard key={course.id} course={course}/>
             })}
         </CoursesContainer>
         <PaginationWrapper counts={coursesData.meta.totalPages} page={page} onChange={handleChange}/>
