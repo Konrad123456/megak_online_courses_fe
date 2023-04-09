@@ -1,5 +1,5 @@
 import Learning from '../../../assets/imgs/learning.jpg';
-import BackGround from '../../../assets/imgs/background.jpg';
+import BackGround from '../../../assets/imgs/background.webp';
 import {AsideImg, LogInAsideContainer} from "./Aside.styles";
 import {Title} from "./Title";
 
