@@ -9,3 +9,7 @@ export interface User {
     email: string;
     roles: Role[];
 }
+
+export interface withToken {
+    access_token: string,
+}
