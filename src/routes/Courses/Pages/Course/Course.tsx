@@ -38,12 +38,12 @@ export const Course: React.FC<ICourseProps> = () => {
             }
         }
         getCourseData();
-    })
+    }, [])
 
     return <CourseContainer>
         <AsideMenu elements={prepareElementsMenu(course)}/>
         <CourseContent>
-            <img src={`${urlConfig.baseUrl}/uploads/courses/${course.id}/img`} alt=""/>
+            {courseId ? <img src={`${urlConfig.baseUrl}/uploads/courses/${courseId}/img`} alt=""/> : null}
             <h2>{course.title}</h2>
             <p>{course.title}</p>
             <p>{course.description}</p>

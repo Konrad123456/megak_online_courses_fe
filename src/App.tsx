@@ -6,49 +6,65 @@ import {LogIn} from "./routes/Authentication/LogIn/LogIn";
 import {Register} from "./routes/Authentication/Register/Register";
 import {AppContainer} from "./App.styles";
 import {Home} from "./routes/Home/Home";
-import {useDispatch} from "react-redux";
-import {setCredentials} from "./features/auth/authSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectCurrentUser, setCredentials} from "./features/auth/authSlice";
 import {useAuthenticatedMutation, useRefreshMutation} from "./app/api/authApiSlice";
 import {Courses} from "./routes/Courses/Pages/Courses/Courses";
 import {Course} from "./routes/Courses/Pages/Course/Course";
+import {AddCourse} from "./routes/Courses/Pages/AddCourse/AddCourse";
+import {useGetCategoriesMutation} from "./app/api/coursesApiSlice";
+import {setCategories} from "./features/categories/categoriesSlice";
 
 const App = () => {
-  const [refresh] = useRefreshMutation();
-  const [authenticated] = useAuthenticatedMutation();
-  const dispatch = useDispatch();
+    const user = useSelector(selectCurrentUser);
+    const [refresh] = useRefreshMutation();
+    const [authenticated] = useAuthenticatedMutation();
+    const [categories] = useGetCategoriesMutation();
 
-  useEffect(() => {
-     const checkLogIn = async () => {
-        const isAuthenticated = await authenticated({}).unwrap();
-        if(isAuthenticated) {
-           const user = await refresh({});
-           //@ts-ignore
-            if (user.data) {
-             //@ts-ignore
-             dispatch(setCredentials(user.data))
-           }
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+       const checkLogIn = async () => {
+          const isAuthenticated = await authenticated({}).unwrap();
+          if(user === null) {
+            if(isAuthenticated) {
+                const userData = await refresh({});
+               //@ts-ignore
+                if (userData.data) {
+                   //@ts-ignore
+                   dispatch(setCredentials(userData.data))
+                }
+            }
+          }
        }
-     }
-      checkLogIn();
-  }, []);
+        checkLogIn();
+    }, []);
 
-  return (
-      <AppContainer>
-          <Routes>
-              <Route path='/' element={<Navigation />}>
-                  <Route index element={<Home />}/>
-                  <Route path='signIn' element={<LogIn />}/>
-                  <Route path='register' element={<Register />}/>
-                  <Route path='courses' >
-                      <Route index element={<Courses />} />
-                      <Route path=':courseId' element={<Course />} />
-                      <Route path='add-course' element={<Course />} />
-                  </Route>
-              </Route>
-          </Routes>
-      </AppContainer>
+    useEffect(() => {
+        const fetchCategories = async () => {
+            const categoriesData = await categories({}).unwrap();
+            console.log(categoriesData);
+            dispatch(setCategories(categoriesData));
+        }
+        fetchCategories();
+    }, [])
 
-  );
+    return (
+        <AppContainer>
+            <Routes>
+                <Route path='/' element={<Navigation />}>
+                    <Route index element={<Home />}/>
+                    <Route path='signIn' element={<LogIn />}/>
+                    <Route path='register' element={<Register />}/>
+                    <Route path='courses' >
+                        <Route index element={<Courses />} />
+                        <Route path=':courseId' element={<Course />} />
+                        <Route path='add-course' element={<AddCourse />} />
+                    </Route>
+                </Route>
+            </Routes>
+        </AppContainer>
+    );
 }
 
 export default App;
