@@ -16,12 +16,11 @@ export const Navigation = () => {
                     <NavLink to={'/'}>MegaK Coursera</NavLink>
                 </LogoText>
                 <NavigationsContainer>
-                    <NavLink to={'/courses'}>Courses</NavLink>
+                    {user ? <NavLink to={'/courses'}>Courses</NavLink> : null}
                     <NavLink to={'/about'}>About</NavLink>
                     <NavLink to={'/contactUs'}>Contact Us</NavLink>
                 </NavigationsContainer>
                 {
-                    //TODO make logout button and make it prettier
                     user ?
                         <UserMenu user={user}/> :
                         <LogInContainer>

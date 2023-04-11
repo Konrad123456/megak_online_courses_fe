@@ -2,7 +2,7 @@ import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectCurrentUser} from "../../../features/auth/authSlice";
 import {WhyWeContainer} from "./WhyWe.styles";
-import Bulb from '../../../assets/imgs/bulb.jpg';
+import Bulb from '../../../assets/imgs/bulb.webp';
 
 export const WhyWe = () => {
     const user = useSelector(selectCurrentUser);

@@ -7,6 +7,7 @@ import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {useLocation, useNavigate} from "react-router";
 import {
+    AvailableVariantsColor,
     ValidationMessage
 } from "../../../reusableComponents/ValidationMessage/ValidationMessage";
 import {FormInput} from "../../../reusableComponents/FormInput/FormInput";
@@ -23,7 +24,7 @@ export const LogInForm = () => {
     const {register, handleSubmit, formState: {errors}} = useForm<LogInUserData>();
     const user = useSelector(selectCurrentUser);
     const location = useLocation();
-    const [login, { isLoading }] = useLoginMutation();
+    const [login, { isLoading, isError }] = useLoginMutation();
     const dispatch = useDispatch();
     const navigation = useNavigate();
 
@@ -59,11 +60,17 @@ export const LogInForm = () => {
                     registerObj={{...register("password")}}
                     errorText={errors.password?.message}
                 />
-                <Button label={'Log In'} />
+                <Button label={'Log In'} isLoading={isLoading}/>
                 {
                     location.state &&
                     <FormInputContainer>
                         <ValidationMessage message={location.state?.success} />
+                    </FormInputContainer>
+                }
+                {
+                    isError &&
+                    <FormInputContainer>
+                        <ValidationMessage message={'Wrong Password or Email'} variant={AvailableVariantsColor.ERROR}/>
                     </FormInputContainer>
                 }
             </InputsContainer>
