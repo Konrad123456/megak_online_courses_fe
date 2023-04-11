@@ -6,12 +6,15 @@ export const AsideMenuContainer = styled.nav`
   flex-direction: column;
   align-self: stretch;
   border-right: 1px solid black;
-  & svg:first-child {
-    position: absolute;
-    right: 0;
-    transform: translate(100%,0);
-    &:hover {
-      cursor: pointer;
+  background-color: #1b1834;
+  color: white;
+  & > div {
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid white;
+    & a {
+      margin-left: 0.25rem;
+      text-decoration: none;
+      color: #61dafb;
     }
   }
 `

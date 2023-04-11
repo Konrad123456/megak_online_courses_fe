@@ -10,3 +10,9 @@ export const NewCourseContainer = styled.div`
   background-color: #1b1834;
   color: white;
 `
+
+export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`

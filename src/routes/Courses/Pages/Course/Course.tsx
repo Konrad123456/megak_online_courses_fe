@@ -26,7 +26,7 @@ export const Course: React.FC<ICourseProps> = () => {
 
     const prepareElementsMenu = (course: CourseWithLesson): {text: string, url: string}[] => {
         return course.lessons.map(lesson => {
-            return {text: lesson.title, url:lesson.text}
+            return {text: lesson.title, url: `/courses/${courseId}/lesson/${lesson.id}`}
         })
     }
 

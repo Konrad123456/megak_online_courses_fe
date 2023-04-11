@@ -14,6 +14,7 @@ import {Course} from "./routes/Courses/Pages/Course/Course";
 import {AddCourse} from "./routes/Courses/Pages/AddCourse/AddCourse";
 import {useGetCategoriesMutation} from "./app/api/coursesApiSlice";
 import {setCategories} from "./features/categories/categoriesSlice";
+import {InstructorsCourses} from "./routes/Courses/Pages/Courses/InstructorsCourses";
 
 const App = () => {
     const user = useSelector(selectCurrentUser);
@@ -29,6 +30,7 @@ const App = () => {
           if(user === null) {
             if(isAuthenticated) {
                 const userData = await refresh({});
+                console.log(userData);
                //@ts-ignore
                 if (userData.data) {
                    //@ts-ignore
@@ -58,6 +60,7 @@ const App = () => {
                     <Route path='register' element={<Register />}/>
                     <Route path='courses' >
                         <Route index element={<Courses />} />
+                        <Route path='instructors' element={<InstructorsCourses />} />
                         <Route path=':courseId' element={<Course />} />
                         <Route path='add-course' element={<AddCourse />} />
                     </Route>

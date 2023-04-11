@@ -10,9 +10,11 @@ export const CourseContent = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  align-items: start;
+  align-items: center;
+  gap: 2rem;
   & > img {
+    margin: 2rem 0;
     align-self: center;
-    max-height: 400px;
+    max-height: 300px;
   }
 `

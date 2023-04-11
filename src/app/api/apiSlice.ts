@@ -28,7 +28,9 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
             }))
             result = await baseQuery(args, api, extraOptions);
         } else {
-            api.dispatch(logOut());
+            if(api.auth.user) {
+                api.dispatch(logOut());
+            }
         }
     }
     return result;

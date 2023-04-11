@@ -5,13 +5,17 @@ import {Course} from "../types/types";
 import React from "react";
 import {urlConfig} from "../../../config/url.config";
 import {useNavigate} from "react-router";
+import {useDeleteCourseMutation} from "../../../app/api/coursesApiSlice";
 
 interface CourseCardProps {
     course: Course;
+    onDelete?: (id: string) => void;
+    edit?: boolean;
 }
 
-export const CourseCard: React.FC<CourseCardProps> = ({course}) => {
+export const CourseCard: React.FC<CourseCardProps> = ({course, edit= false, onDelete}) => {
     const navigate = useNavigate();
+    const [deleteCourse] = useDeleteCourseMutation();
 
     const courseImg = () => {
         return course.imgUrl ?
@@ -21,6 +25,17 @@ export const CourseCard: React.FC<CourseCardProps> = ({course}) => {
 
     const clickHandler = () => {
         navigate(`/courses/${course.id}`);
+    }
+
+    const clickEditHandler = () => {
+        navigate(`/courses/edit/${course.id}`);
+    }
+
+    const deleteClickHandler = async () => {
+        const isDeleted = await deleteCourse({id: course.id}).unwrap();
+        if(isDeleted && onDelete) {
+            onDelete(course.id);
+        }
     }
 
     return (
@@ -41,6 +56,8 @@ export const CourseCard: React.FC<CourseCardProps> = ({course}) => {
                 </CardContent>
                 <CardActions>
                     <Button size="small" onClick={clickHandler}>Learn More</Button>
+                    {edit ? <Button size="small" onClick={clickEditHandler}>Edit</Button> : null}
+                    {edit ? <Button size="small" onClick={deleteClickHandler}>Delete</Button> : null}
                 </CardActions>
             </Card>
         );
