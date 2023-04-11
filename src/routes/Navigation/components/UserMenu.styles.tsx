@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {NavLink} from "react-router-dom";
 
 export const MenuContainer = styled.div`
   position: relative;
@@ -20,10 +21,12 @@ export const ListMenu = styled.nav`
   width: 100%;
   background-color: #1b1834;
 `
-export const ListElement = styled.a`
+export const ListElement = styled(NavLink)`
   padding: 5px 15px;
   width: 100%;
   border: 1px solid white;
+  color: white;
+  text-decoration: none;
   &:hover {
     cursor: pointer;
   }

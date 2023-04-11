@@ -13,3 +13,9 @@ export interface User {
 export interface withToken {
     access_token: string,
 }
+
+export enum Roles {
+    ADMIN = 'ADMIN',
+    INSTRUCTOR = 'INSTRUCTOR',
+    STUDENT = 'STUDENT',
+}

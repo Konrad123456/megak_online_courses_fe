@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@hookform/resolvers": "^3.0.1",
+    "@mui/material": "^5.11.16",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@reduxjs/toolkit": "^1.9.3",
     "@svgr/webpack": "^5.5.0",

@@ -8,6 +8,7 @@ export const NavigationContainer = styled.nav`
   gap: 10px;
   padding: 5px 2rem;
   background-color: #1b1834;
+  border-bottom: 1px solid white;
   color: white;
 `
 
