@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Aplikacja MegaK Coursera
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projekt stworzony w celu zaliczeniowym kursu megaK. Aplikacja do tworzenia kursów internetowych.
 
-## Available Scripts
+## Aktualne możliwości
 
-In the project directory, you can run:
+Aplikacja posiada 3 role: Admin, Instruktor, Student.
 
-### `npm start`
+Student: Po zalogowaniu może przeglądać dowolny interesujący go kurs. Nie może usuwać, dodawać lekcji/kursów
+Instruktor/Admin: Może tworzyć kursy i dodawać do nich lekcje. Może usuwać kursy (tylko swoje kursy).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Czego nie udało się zrealizować:
+Po stronie BE możemy dodawać/edytować/usuwać kursy oraz tak samo lekcje.
+Po stronie FE możemy dodawać/usuwać kursy, dodawać lekcje. Nie udało się skończyc edytowania kusów/lekcji (nazwa, opis...)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Po stronie BE możemy dodawać obrazki do kursów (np. wysyłając go przez postmana), niestety po stronie FE ze względu na błędy
+nie udało się tego zaimplementować (Funckja zostanie dodana w najbliższej przyszłości)
 
-### `npm test`
+Po stronie FE text do lekcji jest dodawany przy użyciyu textArea. W najbliższej przyszłości zostanie zaimplementowany edytor tekstu
+pozwalający załączyć obrazki.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Po FE w najbliższej przyszłości zostanie też zmodernizowana lekko szata graficzna (aby aplikacja wyglądała ładniej)
 
-### `npm run build`
+### Uruchomienie Aplikacji
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Pobranie aplikacji z repozytorium
+2. odpalenie komendy 'npm i'
+3. odpalenie komendy 'npm start'
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prezentacja wideo aplikacji
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Najbliższe udoskonalenia
+1. Poprawa szaty graficznej
+2. Zamiana textArea na edytor tekstu (Draftjs) aby dodawać w lepszy sposób kontent do lekcji
+3. Dodanie możliwości po stronie FE edycji (opis, nazwy, kontent) dla kursu/lekcji
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

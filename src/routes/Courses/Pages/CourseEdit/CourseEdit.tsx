@@ -19,7 +19,7 @@ const InitialState: CourseWithLesson = {
     lessons: [],
 }
 
-export const Course: React.FC<ICourseProps> = () => {
+export const CourseEdit: React.FC<ICourseProps> = () => {
     const [ fetchCourse ] = useCourseViewMutation();
     const [course, setCourse] = useState<CourseWithLesson>(InitialState);
     const { courseId } = useParams();
@@ -41,7 +41,7 @@ export const Course: React.FC<ICourseProps> = () => {
     }, [])
 
     return <CourseContainer>
-        <AsideMenu elements={prepareElementsMenu(course)}/>
+        <AsideMenu elements={prepareElementsMenu(course)} edit/>
         <CourseContent>
             {courseId ? <img src={`${urlConfig.baseUrl}/uploads/courses/${courseId}/img`} alt=""/> : null}
             <h2>{course.title}</h2>

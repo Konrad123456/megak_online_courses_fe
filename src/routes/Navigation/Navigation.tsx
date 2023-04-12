@@ -17,8 +17,8 @@ export const Navigation = () => {
                 </LogoText>
                 <NavigationsContainer>
                     {user ? <NavLink to={'/courses'}>Courses</NavLink> : null}
-                    <NavLink to={'/about'}>About</NavLink>
-                    <NavLink to={'/contactUs'}>Contact Us</NavLink>
+                    {/*<NavLink to={'/about'}>About</NavLink>*/}
+                    {/*<NavLink to={'/contactUs'}>Contact Us</NavLink>*/}
                 </NavigationsContainer>
                 {
                     user ?
