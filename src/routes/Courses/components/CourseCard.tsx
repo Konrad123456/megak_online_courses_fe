@@ -28,7 +28,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({course, edit= false, onDe
     }
 
     const clickEditHandler = () => {
-        navigate(`/courses/edit/${course.id}`);
+        navigate(`/courses/${course.id}/edit`);
     }
 
     const deleteClickHandler = async () => {
@@ -55,9 +55,9 @@ export const CourseCard: React.FC<CourseCardProps> = ({course, edit= false, onDe
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={clickHandler}>Learn More</Button>
-                    {edit ? <Button size="small" onClick={clickEditHandler}>Edit</Button> : null}
-                    {edit ? <Button size="small" onClick={deleteClickHandler}>Delete</Button> : null}
+                    {!edit && <Button size="small" onClick={clickHandler}>Learn More</Button>}
+                    {edit && <Button size="small" onClick={clickEditHandler}>Edit</Button>}
+                    {edit && <Button size="small" onClick={deleteClickHandler}>Delete</Button>}
                 </CardActions>
             </Card>
         );

@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import {Course} from "../../types/types";
 import {Selector} from "../../../../reusableComponents/Selector/Selector";
 import {Category} from "../../../../features/categories/types";
-import {FormContainer, NewCourseContainer} from "./AddCourse.styles";
+import {FormContainer, NewCourseContainer} from "../Styles/Styles";
 import {Button} from "../../../../reusableComponents/Button/Button";
 import React from "react";
 import {useNewCourseMutation} from "../../../../app/api/coursesApiSlice";
