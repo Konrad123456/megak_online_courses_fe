@@ -15,6 +15,9 @@ import {AddCourse} from "./routes/Courses/Pages/AddCourse/AddCourse";
 import {useGetCategoriesMutation} from "./app/api/coursesApiSlice";
 import {setCategories} from "./features/categories/categoriesSlice";
 import {InstructorsCourses} from "./routes/Courses/Pages/Courses/InstructorsCourses";
+import {LessonPage} from "./routes/Courses/Pages/LessonPage/Lesson";
+import {CourseEdit} from "./routes/Courses/Pages/CourseEdit/CourseEdit";
+import {AddLesson} from "./routes/Courses/Pages/AddLesson/AddLesson";
 
 const App = () => {
     const user = useSelector(selectCurrentUser);
@@ -60,8 +63,11 @@ const App = () => {
                     <Route path='register' element={<Register />}/>
                     <Route path='courses' >
                         <Route index element={<Courses />} />
-                        <Route path='instructors' element={<InstructorsCourses />} />
+                        <Route path=':courseId/lesson/add-new' element={<AddLesson />} />
+                        <Route path=':courseId/lesson/:lessonId' element={<LessonPage />} />
+                        <Route path=':courseId/edit' element={<CourseEdit />} />
                         <Route path=':courseId' element={<Course />} />
+                        <Route path='instructors' element={<InstructorsCourses />} />
                         <Route path='add-course' element={<AddCourse />} />
                     </Route>
                 </Route>
