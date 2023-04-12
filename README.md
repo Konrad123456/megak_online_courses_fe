@@ -28,6 +28,7 @@ Po FE w najbliższej przyszłości zostanie też zmodernizowana lekko szata graf
 3. odpalenie komendy 'npm start'
 
 ### Prezentacja wideo aplikacji
+W folderze wideo znajduje się plik mp4 z prezentacją aplikacji
 
 ### Najbliższe udoskonalenia
 1. Poprawa szaty graficznej
