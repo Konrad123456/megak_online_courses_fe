@@ -1,4 +1,4 @@
-import { apiSlice} from "./apiSlice";
+import {apiSlice} from "./apiSlice";
 import {User, withToken} from "../../features/auth/types";
 
 export const authApiSlice = apiSlice.injectEndpoints({

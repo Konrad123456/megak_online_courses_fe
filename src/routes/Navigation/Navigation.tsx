@@ -7,7 +7,7 @@ import {UserMenu} from "./components/UserMenu";
 
 export const Navigation = () => {
     const user = useSelector(selectCurrentUser);
-
+    console.log(user)
     return (
         <>
             <NavigationContainer>
@@ -29,7 +29,6 @@ export const Navigation = () => {
                         </LogInContainer>
                 }
             </NavigationContainer>
-            <Outlet />
         </>
     )
 }
